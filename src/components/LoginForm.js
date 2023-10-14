@@ -46,9 +46,9 @@ function LoginModal({ onClose, onSubmit }) {
             onChange={handlePasswordChange}
           />
           <p>Don't have an account? <u onClick={openSignUpModal}>Sign up</u></p>
-          <button type="submit">Log in</button>
+          <button type="button1">Log in</button>
         </form>
-        <button type="button" onClick={onClose}>Close</button>
+        <button type="button2" onClick={onClose}>Close</button>
       </div>
       {showSignUpModal && <SignUpModal onClose={closeSignUpModal} onSumbmit={onSubmit} />}
     </div>
