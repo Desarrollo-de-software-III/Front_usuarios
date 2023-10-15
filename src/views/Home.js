@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import './Home.css'; 
-import Navbar from '../components/Navbar.js';
 import LoginModal from "../components/LoginForm.js";
+import Navbar from '../components/Navbar.js';
 import SignUpModal from "../components/SignUpForm.js";
 import gif from '../components/images/gif.gif';
+import './Home.css';
 
 function Home() {
     const [showLoginModal, setShowLoginModal] = useState(false);

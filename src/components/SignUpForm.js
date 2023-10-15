@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import './Form.css';
 import Swal from 'sweetalert2';
+import './Form.css';
 
 function SignUpModal({ onClose }) {
   const [email, setEmail] = useState('');
