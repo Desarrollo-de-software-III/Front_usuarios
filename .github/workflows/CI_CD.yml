@@ -1,4 +1,4 @@
-name: Build, Test and Deploy to Docker Hub
+name: DSSI-26 Build, Test and Deploy to Docker Hub
 
 on:
   push:
@@ -17,13 +17,13 @@ jobs:
       run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
     - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/FRONT_USUARIOS:latest .
-      
-    - name: Run tests
-      run: npm test
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/front_usuarios:latest .
+
+    - name: Run test
+      run: npm install && npm test
 
     - name: Push Docker image to Docker Hub
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/FRONT_USUARIOS:latest
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/front_usuarios:latest
 
     
 
