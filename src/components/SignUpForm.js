@@ -37,7 +37,7 @@ function SignUpModal({ onClose }) {
         };
         console.log(userData)
 
-        // Realiza la solicitud POST al servicio de registro de usuarios.
+        // Realiza la solicitud POST a la url del servicio de registro de usuarios.
         fetch("https://urlservicio/registro", {
           method: "POST",
           headers: {
