@@ -34,8 +34,10 @@ function Home() {
             <Navbar openLoginModal={openLoginModal} openSignUpModal={openSignUpModal} />
             {showLoginModal && <LoginModal onClose={closeLoginModal} />}
             {showSignUpModal && <SignUpModal onClose={closeSignUpModal} />}
+            
             <h1>Welcome to questions and answers</h1>
             <h4>discover the benefits!</h4>
+            
             <div className="features">
                 <div className="feature">
                     <p>Find answers to your questions</p>
