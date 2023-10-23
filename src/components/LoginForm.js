@@ -62,7 +62,7 @@ function LoginModal({ onClose, onSubmit }) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h1 className="modal-content">Log in</h1>
+        <h1>Log in</h1>
         <form onSubmit={handleSubmit}>
           <input
             type="email"

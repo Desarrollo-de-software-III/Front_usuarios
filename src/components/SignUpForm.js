@@ -65,7 +65,7 @@ function SignUpModal({ onClose }) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h1 className="modal-content">Sign up</h1>
+        <h1>Sign up</h1>
         <form>
           <input
             type="username"
