@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './Navbar.css';
-import logo from './images/logo.jpeg'
-import teams from './images/teams.png'
+import logo from './images/logo.jpeg';
+import teams from './images/teams.png';
 
 function Navbar({ openLoginModal, openSignUpModal }) {
   const [menuOpen, setMenuOpen] = useState(false);
