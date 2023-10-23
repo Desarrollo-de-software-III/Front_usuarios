@@ -8,7 +8,7 @@ import Home from './views/Home/Home.js';
 function App() {
   return (
     <Router>
-      <Routes> {/* Usamos <Routes> en lugar de <Router> */}
+      <Routes> 
         <Route path="/" element={<Home />} />
         {/* <Route path="/registro" element={<RegistrationForm />} />
         <Route path="/inicio-sesion" element={<LoginForm />} /> */}
