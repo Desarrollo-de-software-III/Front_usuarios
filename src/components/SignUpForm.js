@@ -19,7 +19,9 @@ function SignUpModal({ onClose }) {
     setPassword(event.target.value);
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault(); // Prevenir la acción predeterminada del formulario
+
     // Muestra un cuadro de diálogo de confirmación
     Swal.fire({
       title: 'Confirmar registro',
@@ -35,9 +37,9 @@ function SignUpModal({ onClose }) {
           email: email,
           password: password,
         };
-        console.log(userData)
+        console.log(userData);
 
-        // Realiza la solicitud POST a la url del servicio de registro de usuarios.
+        // Realiza la solicitud POST a la URL del servicio de registro de usuarios.
         fetch("https://urlservicio/registro", {
           method: "POST",
           headers: {
@@ -94,6 +96,8 @@ function SignUpModal({ onClose }) {
 }
 
 export default SignUpModal;
+
+
 
 
 
