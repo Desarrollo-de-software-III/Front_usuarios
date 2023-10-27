@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Form.css';
 import SignUpModal from "./SignUpForm.js";
+import Swal from 'sweetalert2';
 
 function LoginModal({ onClose, onSubmit }) {
   const [email, setEmail] = useState('');
@@ -17,7 +18,37 @@ function LoginModal({ onClose, onSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(email, password);
+
+    const data = {
+      email: email,
+      password: password
+    };
+
+    const loginUrl = 'https://urlservicio/login'; 
+
+    fetch(loginUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => {
+        if (response.ok) {
+          // La solicitud fue exitosa, muestra un mensaje de éxito
+          Swal.fire('Success', 'Inicio de sesión exitoso', 'success');
+          console.log("Inicio de sesión exitoso");
+        } else {
+          // La solicitud no fue exitosa, maneja el error y muestra un mensaje de error
+          Swal.fire('Error', 'Inicio de sesión fallido', 'error');
+          console.error("Error al iniciar sesión");
+        }
+      })
+      .catch(error => {
+        // Maneja los errores en caso de problemas de red u otros errores y muestra un mensaje de error
+        Swal.fire('Error', 'Ocurrió un error inesperado', 'error');
+        console.error(error);
+      });
   };
 
   const openSignUpModal = () => {
@@ -31,7 +62,7 @@ function LoginModal({ onClose, onSubmit }) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h1 className="modal-content">Log in</h1>
+        <h1>Log in</h1>
         <form onSubmit={handleSubmit}>
           <input
             type="email"

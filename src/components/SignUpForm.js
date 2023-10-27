@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Swal from 'sweetalert2';
 import './Form.css';
+import axios from "axios";
 
 function SignUpModal({ onClose }) {
   const [email, setEmail] = useState('');
@@ -19,7 +20,9 @@ function SignUpModal({ onClose }) {
     setPassword(event.target.value);
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault(); // Prevenir la acción predeterminada del formulario
+
     // Muestra un cuadro de diálogo de confirmación
     Swal.fire({
       title: 'Confirmar registro',
@@ -30,34 +33,29 @@ function SignUpModal({ onClose }) {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        const userData = {
-          username: username,
-          email: email,
-          password: password,
-        };
-        console.log(userData)
+        const userData = { username, email, password }
+        console.log(userData);
 
-        // Realiza la solicitud POST al servicio de registro de usuarios.
-        fetch("https://urlservicio/registro", {
+        // Realiza la solicitud POST a la URL del servicio de registro de usuarios.
+        axios({
+          url: "http://127.0.0.1:8001/user/",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(userData),
-        })
-          .then((response) => {
-            if (response.ok) {
-              // El registro fue exitoso. Muestra un mensaje de éxito.
-              Swal.fire('¡Registro exitoso!', '', 'success');
-            } else {
-              // El registro falló. Muestra un mensaje de error.
-              Swal.fire('Error en el registro', '', 'error');
-            }
-          })
-          .catch((error) => {
-            // Muestra un mensaje de error en caso de error en la solicitud.
-            Swal.fire('Error en la solicitud', '', 'error');
-          });
+          data: userData,
+        }).then((response) => {
+          if (response.status === 201) {
+            // El registro fue exitoso. Muestra un mensaje de éxito.
+            Swal.fire('¡Registro exitoso!', '', 'success');
+          } else {
+            // El registro falló. Muestra un mensaje de error.
+            Swal.fire('Error en el registro', '', 'error');
+          }
+        }).catch((error) => {
+          // Muestra un mensaje de error en caso de error en la solicitud.
+          Swal.fire('Error en la solicitud', '', 'error');
+        });
       }
     });
   };
@@ -65,7 +63,7 @@ function SignUpModal({ onClose }) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h1 className="modal-content">Sign up</h1>
+        <h1>Sign up</h1>
         <form>
           <input
             type="username"
@@ -94,6 +92,8 @@ function SignUpModal({ onClose }) {
 }
 
 export default SignUpModal;
+
+
 
 
 
