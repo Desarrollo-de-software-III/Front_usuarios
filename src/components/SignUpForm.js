@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Swal from 'sweetalert2';
 import './Form.css';
+import axios from "axios";
 
 function SignUpModal({ onClose }) {
   const [email, setEmail] = useState('');
@@ -32,34 +33,29 @@ function SignUpModal({ onClose }) {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        const userData = {
-          username: username,
-          email: email,
-          password: password,
-        };
+        const userData = { username, email, password }
         console.log(userData);
 
         // Realiza la solicitud POST a la URL del servicio de registro de usuarios.
-        fetch("http://127.0.0.1:8000/signup/", {
+        axios({
+          url: "http://127.0.0.1:8001/user/",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(userData),
-        })
-          .then((response) => {
-            if (response.ok) {
-              // El registro fue exitoso. Muestra un mensaje de éxito.
-              Swal.fire('¡Registro exitoso!', '', 'success');
-            } else {
-              // El registro falló. Muestra un mensaje de error.
-              Swal.fire('Error en el registro', '', 'error');
-            }
-          })
-          .catch((error) => {
-            // Muestra un mensaje de error en caso de error en la solicitud.
-            Swal.fire('Error en la solicitud', '', 'error');
-          });
+          data: userData,
+        }).then((response) => {
+          if (response.status === 201) {
+            // El registro fue exitoso. Muestra un mensaje de éxito.
+            Swal.fire('¡Registro exitoso!', '', 'success');
+          } else {
+            // El registro falló. Muestra un mensaje de error.
+            Swal.fire('Error en el registro', '', 'error');
+          }
+        }).catch((error) => {
+          // Muestra un mensaje de error en caso de error en la solicitud.
+          Swal.fire('Error en la solicitud', '', 'error');
+        });
       }
     });
   };
