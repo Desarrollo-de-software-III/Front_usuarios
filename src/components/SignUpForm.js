@@ -40,7 +40,7 @@ function SignUpModal({ onClose }) {
         console.log(userData);
 
         // Realiza la solicitud POST a la URL del servicio de registro de usuarios.
-        fetch("https://urlservicio/registro", {
+        fetch("http://127.0.0.1:8000/user/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
