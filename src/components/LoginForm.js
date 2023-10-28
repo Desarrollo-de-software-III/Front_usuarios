@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './Form.css';
 import SignUpModal from "./SignUpForm.js";
 import Swal from 'sweetalert2';
+import axios from "axios";
 
 function LoginModal({ onClose, onSubmit }) {
   const [email, setEmail] = useState('');
@@ -19,32 +20,38 @@ function LoginModal({ onClose, onSubmit }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // Validar que ambos campos estén llenados
+    if (email.trim() === '' || password.trim() === '') {
+      // Si uno o ambos campos están vacíos, muestra un mensaje de error
+      Swal.fire('Advertencia', 'Por favor complete todos los campos', 'warning');
+      return; // Salir de la función para evitar la solicitud Ajax
+    }
+
     const data = {
       email: email,
       password: password
     };
 
-    const loginUrl = 'https://urlservicio/login'; 
+    console.log(data);
 
-    fetch(loginUrl, {
+    axios({
+      url: 'http://127.0.0.1:8000',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
-    })
-      .then(response => {
-        if (response.ok) {
+      body: data
+    }).then(response => {
+        if (response.status === 201) {
           // La solicitud fue exitosa, muestra un mensaje de éxito
           Swal.fire('Success', 'Inicio de sesión exitoso', 'success');
           console.log("Inicio de sesión exitoso");
         } else {
           // La solicitud no fue exitosa, maneja el error y muestra un mensaje de error
           Swal.fire('Error', 'Inicio de sesión fallido', 'error');
-          console.error("Error al iniciar sesión");
+          console.error("Error al iniciar sesión, verifique que su correo y contraseña sean correctos");
         }
-      })
-      .catch(error => {
+      }).catch(error => {
         // Maneja los errores en caso de problemas de red u otros errores y muestra un mensaje de error
         Swal.fire('Error', 'Ocurrió un error inesperado', 'error');
         console.error(error);
@@ -77,9 +84,9 @@ function LoginModal({ onClose, onSubmit }) {
             onChange={handlePasswordChange}
           />
           <p>Don't have an account? <u onClick={openSignUpModal}>Sign up</u></p>
-          <button type="button1">Log in</button>
+          <button type="button1">Log in</button> 
         </form>
-        <button type="button2" onClick={onClose}>Close</button>
+        <button type="button2" onClick={onClose}>Close</button> 
       </div>
       {showSignUpModal && <SignUpModal onClose={closeSignUpModal} onSumbmit={onSubmit} />}
     </div>
@@ -87,5 +94,6 @@ function LoginModal({ onClose, onSubmit }) {
 }
 
 export default LoginModal;
+
 
 
