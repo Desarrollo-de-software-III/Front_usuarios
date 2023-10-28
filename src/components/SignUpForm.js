@@ -4,60 +4,82 @@ import './Form.css';
 import axios from "axios";
 
 function SignUpModal({ onClose }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    username: '',
+    errors: {},
+  });
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+  const validateForm = () => {
+    const errors = {};
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+    // Validación del campo username
+    if (formData.username.trim() === "") {
+      errors.username = "El nombre de usuario es requerido";
+    }
+
+    // Validación del campo email
+    if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email)) {
+      errors.email = "El correo electrónico no es válido";
+    }
+
+    // Validación del campo password
+    if (formData.password.trim() === "") {
+      errors.password = "La contraseña es requerida";
+    } else if (formData.password.length < 8) {
+      errors.password = "La contraseña debe tener al menos 8 caracteres";
+    }
+
+    setFormData({ ...formData, errors });
+
+    return Object.keys(errors).length === 0; // Retorna true si no hay errores
   };
 
   const handleSignUp = (e) => {
-    e.preventDefault(); // Prevenir la acción predeterminada del formulario
+    e.preventDefault();
 
-    // Muestra un cuadro de diálogo de confirmación
-    Swal.fire({
-      title: 'Confirmar registro',
-      text: '¿Estás seguro de que deseas enviar estos datos?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const userData = { username, email, password }
-        console.log(userData);
+    if (validateForm()) {
+      // Validación exitosa, procede con la solicitud POST
+      Swal.fire({
+        title: 'Confirmar registro',
+        text: '¿Estás seguro de que deseas enviar estos datos?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const userData = { username: formData.username, email: formData.email, password: formData.password };
+          console.log(userData);
 
-        // Realiza la solicitud POST a la URL del servicio de registro de usuarios.
-        axios({
-          url: "http://127.0.0.1:8001/user/",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          data: userData,
-        }).then((response) => {
-          if (response.status === 201) {
-            // El registro fue exitoso. Muestra un mensaje de éxito.
-            Swal.fire('¡Registro exitoso!', '', 'success');
-          } else {
-            // El registro falló. Muestra un mensaje de error.
-            Swal.fire('Error en el registro', '', 'error');
-          }
-        }).catch((error) => {
-          // Muestra un mensaje de error en caso de error en la solicitud.
-          Swal.fire('Error en la solicitud', '', 'error');
-        });
-      }
-    });
+          axios({
+            url: "http://127.0.0.1:8001/user/",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data: userData,
+          }).then((response) => {
+            if (response.status === 201) {
+              Swal.fire('¡Registro exitoso!', '', 'success');
+            } else {
+              Swal.fire('Error en el registro', '', 'error');
+            }
+          }).catch((error) => {
+            Swal.fire('Error en la solicitud', '', 'error');
+          });
+        }
+      });
+    }
   };
 
   return (
@@ -66,23 +88,29 @@ function SignUpModal({ onClose }) {
         <h1>Sign up</h1>
         <form>
           <input
-            type="username"
+            type="text"
+            name="username"
             placeholder="Username"
-            value={username}
-            onChange={handleUsernameChange}
+            value={formData.username}
+            onChange={handleInputChange}
           />
+          {formData.errors.username && <p className="error">{formData.errors.username}</p>}
           <input
             type="email"
+            name="email"
             placeholder="Email"
-            value={email}
-            onChange={handleEmailChange}
+            value={formData.email}
+            onChange={handleInputChange}
           />
+          {formData.errors.email && <p className="error">{formData.errors.email}</p>}
           <input
             type="password"
+            name="password"
             placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
+            value={formData.password}
+            onChange={handleInputChange}
           />
+          {formData.errors.password && <p className="error">{formData.errors.password}</p>}
           <button type="button1" onClick={handleSignUp}>Sign up</button>
         </form>
         <button type="button2" onClick={onClose}>Close</button>
@@ -92,6 +120,7 @@ function SignUpModal({ onClose }) {
 }
 
 export default SignUpModal;
+
 
 
 
