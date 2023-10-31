@@ -1,7 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Swal from 'sweetalert2';
 import './Form.css';
-import axios from "axios";
 
 function SignUpModal({ onClose }) {
   const [formData, setFormData] = useState({
@@ -62,21 +62,22 @@ function SignUpModal({ onClose }) {
           console.log(userData);
 
           axios({
-  url: "http://userservice:30002/user/",  
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  data: userData,
-}).then((response) => {
-  if (response.status === 201) {
-    Swal.fire('¡Registro exitoso!', '', 'success');
-  } else {
-    Swal.fire('Error en el registro', '', 'error');
-  }
-}).catch((error) => {
-  Swal.fire('Error en la solicitud', '', 'error');
-});
+            url: "http://users:8000/user/",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data: userData,
+          }).then((response) => {
+            if (response.status === 201) {
+              Swal.fire('¡Registro exitoso!', '', 'success');
+            } else {
+              Swal.fire('Error en el registro', '', 'error');
+            }
+          }).catch((error) => {
+            console.log(error)
+            Swal.fire('Error en la solicitud', '', 'error');
+          });
 
         }
       });
