@@ -62,21 +62,22 @@ function SignUpModal({ onClose }) {
           console.log(userData);
 
           axios({
-            url: "http://127.0.0.1:8001/user/",
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            data: userData,
-          }).then((response) => {
-            if (response.status === 201) {
-              Swal.fire('¡Registro exitoso!', '', 'success');
-            } else {
-              Swal.fire('Error en el registro', '', 'error');
-            }
-          }).catch((error) => {
-            Swal.fire('Error en la solicitud', '', 'error');
-          });
+  url: "http://userservice:30002/user/",  
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  data: userData,
+}).then((response) => {
+  if (response.status === 201) {
+    Swal.fire('¡Registro exitoso!', '', 'success');
+  } else {
+    Swal.fire('Error en el registro', '', 'error');
+  }
+}).catch((error) => {
+  Swal.fire('Error en la solicitud', '', 'error');
+});
+
         }
       });
     }
