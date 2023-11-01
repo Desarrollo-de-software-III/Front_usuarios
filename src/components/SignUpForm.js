@@ -62,7 +62,7 @@ function SignUpModal({ onClose }) {
           console.log(userData);
 
           axios({
-            url: "http://localhost/api/users/create",
+            url: "http://localhost/api/users/create/",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
