@@ -62,7 +62,7 @@ function SignUpModal({ onClose }) {
           console.log(userData);
 
           axios({
-            url: "http://apigateway/users/create/",
+            url: "http://apigateway:5000/users/create/",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
