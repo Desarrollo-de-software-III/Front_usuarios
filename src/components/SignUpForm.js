@@ -62,7 +62,7 @@ function SignUpModal({ onClose }) {
           console.log(userData);
 
           axios({
-            url: "http://users-svc.question-answer:8000/users/create/",
+            url: "http://users-svc.question-answer.svc.cluster.local:8000/users/create/",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
