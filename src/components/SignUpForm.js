@@ -61,14 +61,13 @@ function SignUpModal({ onClose }) {
           const userData = { username: formData.username, email: formData.email, password: formData.password };
           console.log(userData);
 
-          axios({
-            url: "http://localhost/api/users/create/",
-            method: "POST",
+          axios.post("http://localhost:5001/users/create/",
+          userData, {
             headers: {
               "Content-Type": "application/json",
             },
-            data: userData,
           }).then((response) => {
+            console.log(response)
             if (response.status === 201) {
               Swal.fire('¡Registro exitoso!', '', 'success');
             } else {
