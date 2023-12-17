@@ -61,7 +61,7 @@ function SignUpModal({ onClose }) {
           const userData = { username: formData.username, email: formData.email, password: formData.password };
           console.log(userData);
 
-          axios.post("http://users-svc:8000/users/create/",
+          axios.post("/api/users/create/",
           userData, {
             headers: {
               "Content-Type": "application/json",
