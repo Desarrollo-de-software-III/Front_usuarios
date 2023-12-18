@@ -62,6 +62,7 @@ function SignUpModal({ onClose }) {
           console.log(userData);
 
           axios.post("/api/users/create/",
+          //axios.post("http://127.0.0.1:8000/create/",
           userData, {
             headers: {
               "Content-Type": "application/json",

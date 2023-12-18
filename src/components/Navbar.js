@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 import logo from './images/logo.jpeg';
 import teams from './images/teams.png';
@@ -16,8 +17,10 @@ function Navbar({ openLoginModal, openSignUpModal }) {
         <div className="menu-icon" onClick={toggleMenu}>
           ☰
         </div>
-        <img src={logo} alt="Logo" className="logo"/>
-        <div className="qna">Q&A</div>
+       
+          <img src={logo} alt="Logo" className="logo"/>
+          <div className="qna">Q&A</div>
+        
       </div>
       <div className="right-section">
         <div className="search-bar">
@@ -32,8 +35,8 @@ function Navbar({ openLoginModal, openSignUpModal }) {
         <div className="menu">
           <p>Public</p>
           <ul>
-            <li>Home</li>
-            <li>Questions</li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/questions">Questions</Link></li>
             <li>Users</li>
             <li>Tags</li>
           </ul>
@@ -47,6 +50,7 @@ function Navbar({ openLoginModal, openSignUpModal }) {
 }
 
 export default Navbar;
+
 
 
 

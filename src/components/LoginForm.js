@@ -8,6 +8,7 @@ function LoginModal({ onClose, onSubmit }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showSignUpModal, setShowSignUpModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -35,17 +36,19 @@ function LoginModal({ onClose, onSubmit }) {
     console.log(data);
 
     axios({
-      url: 'http://127.0.0.1:8000',
+      url: 'http://127.0.0.1:8001/login/',
+      // http://auth-svc:8000/signup/
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: data
     }).then(response => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           // La solicitud fue exitosa, muestra un mensaje de éxito
           Swal.fire('Success', 'Inicio de sesión exitoso', 'success');
           console.log("Inicio de sesión exitoso");
+          setIsLoggedIn(true);
         } else {
           // La solicitud no fue exitosa, maneja el error y muestra un mensaje de error
           Swal.fire('Error', 'Inicio de sesión fallido', 'error');
@@ -64,6 +67,10 @@ function LoginModal({ onClose, onSubmit }) {
 
   const closeSignUpModal = () => {
     setShowSignUpModal(false);
+  };
+
+  const isUserLoggedIn = () => {
+    return isLoggedIn;
   };
 
   return (
