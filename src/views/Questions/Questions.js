@@ -3,10 +3,12 @@ import './Questions.css';
 import Navbar from '../../components/Navbar.js';
 import LoginModal from "../../components/LoginForm.js";
 import SignUpModal from "../../components/SignUpForm.js";
+import PreguntaModal from "../../components/Pregunta.js";
 
 function Questions() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showSignUpModal, setShowSignUpModal] = useState(false);
+    const [showPreguntaModal, setShowPreguntaModal] = useState(false);
 
     const questionsData = [
         {
@@ -25,6 +27,14 @@ function Questions() {
         },
         
     ];
+
+    const openPreguntaModal = () => {
+        setShowPreguntaModal(true);
+    };
+
+    const closePreguntaModal = () => {
+        setShowPreguntaModal(false);
+    };
 
     const openLoginModal = () => {
         setShowLoginModal(true);
@@ -48,10 +58,11 @@ function Questions() {
 
             {showLoginModal && <LoginModal onClose={closeLoginModal} />}
             {showSignUpModal && <SignUpModal onClose={closeSignUpModal} />}
+            {showPreguntaModal && <PreguntaModal onClose={closePreguntaModal} />}
 
             <div className="container-questions">
                 <h1>All questions</h1>
-                <div className="ask-button">
+                <div className="ask-button" onClick={openPreguntaModal}>
                     Ask Question
                 </div>
             </div>

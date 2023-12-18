@@ -1,0 +1,90 @@
+.pregunta {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .pregunta-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .pregunta-content h1 {
+    text-align: center;
+    color: #2F7AF4;
+  }
+  
+  .pregunta-content p{
+    text-align: center;
+    color: #090909e0;
+  }
+  
+  .pregunta-content u{
+    color: #007BFF;
+    cursor: pointer;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  textarea[type="descripcion"] {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    max-height: 400px;
+    box-sizing: border-box;
+    resize: none;
+    overflow-y: auto;
+  }
+
+  
+  button[type="button1"] {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="button1"]:hover {
+    background-color: #0056b3;
+  }
+  
+  button[type="button2"] {
+    background-color: #ccc;
+    color: #333;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button[type="button2"]:hover {
+    background-color: #999;
+  }
