@@ -38,6 +38,7 @@ function LoginModal({ onClose, onSubmit }) {
     axios({
       url: 'http://127.0.0.1:8001/login/',
       // http://auth-svc:8000/signup/
+      // http://127.0.0.1:8001/login/
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Home from './views/Home/Home.js';
 import Questions from './views/Questions/Questions.js';
-// import RegistrationForm from './views/RegistrationForm';
-// import LoginForm from './views/LoginForm';
 
 function App() {
   return (
@@ -12,8 +10,6 @@ function App() {
       <Routes> 
         <Route path="/" element={<Home />} />
         <Route path="/questions" element={<Questions />} />
-        {/* <Route path="/registro" element={<RegistrationForm />} />
-        <Route path="/inicio-sesion" element={<LoginForm />} /> */}
       </Routes>
     </Router>
   );
