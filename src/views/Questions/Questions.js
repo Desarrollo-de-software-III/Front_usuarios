@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import './Questions.css'; 
+import React, { useState, useEffect } from "react";
+import './Questions.css';
 import Navbar from '../../components/Navbar.js';
 import LoginModal from "../../components/LoginForm.js";
 import SignUpModal from "../../components/SignUpForm.js";
@@ -9,24 +9,15 @@ function Questions() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showSignUpModal, setShowSignUpModal] = useState(false);
     const [showPreguntaModal, setShowPreguntaModal] = useState(false);
+    const [questionsData, setQuestionsData] = useState([]);
 
-    const questionsData = [
-        {
-            id: 1,
-            title: 'Cómo puedo aprender React?',
-            description: 'Me gustaría empezar a aprender React y estoy buscando recursos recomendados.',
-            answersCount: 5,
-            favoritesCount: 10,
-        },
-        {
-            id: 2,
-            title: 'Problema al hacer fetch en React',
-            description: 'Estoy teniendo problemas al hacer una solicitud fetch en mi aplicación React. ¿Alguien puede ayudarme?',
-            answersCount: 8,
-            favoritesCount: 15,
-        },
-        
-    ];
+    useEffect(() => {
+        // GET al endpoint de preguntas
+        fetch('http://localhost:4000/preguntas')
+            .then(response => response.json())
+            .then(data => setQuestionsData(data))
+            .catch(error => console.error('Error fetching questions:', error));
+    }, []);
 
     const openPreguntaModal = () => {
         setShowPreguntaModal(true);
@@ -68,14 +59,14 @@ function Questions() {
             </div>
             <div className="question-container">
                 {questionsData.map((question) => (
-                    <div key={question.id} className="question">
+                    <div key={question._id} className="question">
                         <div className="question-info">
-                            <h2>{question.title}</h2>
+                            <h2>{question.titulo}</h2>
                             <p>{question.description}</p>
                         </div>
                         <div className="question-stats">
-                            <p>{question.answersCount} Answers</p>
-                            <p>{question.favoritesCount} Favorites</p>
+                            <p>{question.count ? `${question.count} Answers` : '0 Answers'}</p>
+                            <p>{question.favoritesCount ? `${question.favoritesCount} Favorites` : '0 Favorites'}</p>
                         </div>
                     </div>
                 ))}

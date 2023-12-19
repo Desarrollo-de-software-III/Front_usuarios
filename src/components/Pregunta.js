@@ -5,7 +5,7 @@ import axios from "axios";
 
 function PreguntaModal({ onClose, onSubmit }) {
   const [titulo, setTitulo] = useState('');
-  const [descripcion, setDescripcion] = useState('');
+  const [description, setDescripcion] = useState('');
   const [showPreguntaModal, setShowPreguntaModal] = useState(false);
 
   const handleTituloChange = (event) => {
@@ -16,50 +16,34 @@ function PreguntaModal({ onClose, onSubmit }) {
     setDescripcion(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validar que ambos campos estén llenados
-    if (titulo.trim() === '' || descripcion.trim() === '') {
-      // Si uno o ambos campos están vacíos, muestra un mensaje de error
+    if (titulo.trim() === '' || description.trim() === '') {
       Swal.fire('Advertencia', 'Por favor complete todos los campos', 'warning');
-      return; 
+      return;
     }
 
     const data = {
       titulo: titulo,
-      descripcion: descripcion
+      description: description
     };
 
-    console.log(data);
+    try {
+      const response = await axios.post('http://localhost:4000/preguntas', data);
 
-    axios({
-      url: 'http://127.0.0.1:8001/login/',
-      // http://auth-svc:8000/signup/
-      // http://127.0.0.1:8001/login/
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: data
-    }).then(response => {
-        if (response.status === 200) {
-          // La solicitud fue exitosa, muestra un mensaje de éxito
-          Swal.fire('Success', 'Inicio de sesión exitoso', 'success');
-          console.log("Inicio de sesión exitoso");
-          
-        } else {
-          // La solicitud no fue exitosa, maneja el error y muestra un mensaje de error
-          Swal.fire('Error', 'Inicio de sesión fallido', 'error');
-          console.error("Error al iniciar sesión, verifique que su correo y contraseña sean correctos");
-        }
-      }).catch(error => {
-        // Maneja los errores en caso de problemas de red u otros errores y muestra un mensaje de error
-        Swal.fire('Error', 'Ocurrió un error inesperado', 'error');
-        console.error(error);
-      });
+      if (response.status === 201) {
+        Swal.fire('Success', 'Pregunta enviada exitosamente', 'success');
+        console.log("Pregunta enviada exitosamente");
+      } else {
+        Swal.fire('Error', 'Envío de pregunta fallido', 'error');
+        console.error("Error al enviar pregunta, verifique la información");
+      }
+    } catch (error) {
+      Swal.fire('Error', 'Ocurrió un error inesperado', 'error');
+      console.error(error);
+    }
   };
-
   const closePreguntaModal = () => {
     setShowPreguntaModal(false);
   };
@@ -78,7 +62,7 @@ function PreguntaModal({ onClose, onSubmit }) {
           <textarea
             type="descripcion"
             placeholder="Descripción"
-            value={descripcion}
+            value={description}
             onChange={handleDescripcionChange}
           />
           <button type="button1">Send</button> 
