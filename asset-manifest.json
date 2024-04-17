@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Desarrollo-de-software-III/Front_usuarios/static/css/main.dc8454c7.css",
+    "main.js": "/Desarrollo-de-software-III/Front_usuarios/static/js/main.0b3673e5.js",
+    "static/media/gif.gif": "/Desarrollo-de-software-III/Front_usuarios/static/media/gif.637820216d2ab00a85aa.gif",
+    "static/media/animation4.gif": "/Desarrollo-de-software-III/Front_usuarios/static/media/animation4.ef477422cf335d517622.gif",
+    "static/media/animation1.gif": "/Desarrollo-de-software-III/Front_usuarios/static/media/animation1.78f0e663527322763069.gif",
+    "static/media/animation3.gif": "/Desarrollo-de-software-III/Front_usuarios/static/media/animation3.855881fd98dd688fc7d4.gif",
+    "static/media/logo.jpeg": "/Desarrollo-de-software-III/Front_usuarios/static/media/logo.9eed6515c38cdfb1e0a7.jpeg",
+    "static/media/teams.png": "/Desarrollo-de-software-III/Front_usuarios/static/media/teams.44433128a1f52eb55b67.png",
+    "static/media/animation2.gif": "/Desarrollo-de-software-III/Front_usuarios/static/media/animation2.ce8f152985a45d23ca2a.gif",
+    "index.html": "/Desarrollo-de-software-III/Front_usuarios/index.html",
+    "main.dc8454c7.css.map": "/Desarrollo-de-software-III/Front_usuarios/static/css/main.dc8454c7.css.map",
+    "main.0b3673e5.js.map": "/Desarrollo-de-software-III/Front_usuarios/static/js/main.0b3673e5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dc8454c7.css",
+    "static/js/main.0b3673e5.js"
+  ]
+}
