@@ -8,7 +8,7 @@ function LoginModal({ onClose, onSubmit }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showSignUpModal, setShowSignUpModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [setIsLoggedIn] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
