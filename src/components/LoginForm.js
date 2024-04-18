@@ -68,9 +68,9 @@ function LoginModal({ onClose, onSubmit }) {
     setShowSignUpModal(false);
   };
 
-  const isUserLoggedIn = () => {
-    return isLoggedIn;
-  };
+  //const isUserLoggedIn = () => {
+    //return isLoggedIn;
+  //};
 
   return (
     <div className="modal">
